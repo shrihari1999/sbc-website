@@ -448,13 +448,25 @@ body {
     display: flex;
   }
 
-  .hero-logo {
-    width: 575px;
+  .hero-content {
     max-width: 90vw;
   }
 
+  .hero-logo {
+    display: block;
+    width: 110vw;
+    max-width: none;
+    position: relative;
+    left: 50%;
+    transform: translateX(calc(-50% - 7px));
+  }
+
   .hero-tagline {
-    font-size: 1.25rem;
+    font-size: 1.15rem;
+  }
+
+  .hero-description {
+    font-size: 1.15rem;
   }
 
   .section-title {
