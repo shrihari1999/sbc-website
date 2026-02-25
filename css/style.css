@@ -48,11 +48,11 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 64px;
+  height: 84px;
 }
 
 .nav-logo-img {
-  height: 44px;
+  height: 66px;
   width: auto;
 }
 
@@ -398,6 +398,32 @@ body {
   font-size: 0.9rem;
 }
 
+/* === Disclaimer === */
+.disclaimer-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.disclaimer-list {
+  list-style: none;
+}
+
+.disclaimer-list li {
+  color: var(--text-light);
+  font-size: 0.95rem;
+  line-height: 1.7;
+  padding: 8px 0 8px 20px;
+  position: relative;
+}
+
+.disclaimer-list li::before {
+  content: "\2022";
+  color: var(--accent);
+  position: absolute;
+  left: 0;
+  font-weight: 700;
+}
+
 /* === Footer === */
 .footer {
   border-top: 1px solid rgba(58, 157, 181, 0.15);
@@ -425,6 +451,13 @@ body {
   margin-top: 4px;
 }
 
+.footer-disclaimer {
+  color: var(--text-light);
+  font-size: 0.75rem;
+  margin-top: 16px;
+  opacity: 0.6;
+}
+
 /* === Mobile Responsive === */
 @media (max-width: 768px) {
   .nav-toggle {
@@ -434,7 +467,7 @@ body {
   .nav-links {
     display: none;
     position: absolute;
-    top: 64px;
+    top: 84px;
     left: 0;
     right: 0;
     background: rgba(14, 22, 41, 0.98);
