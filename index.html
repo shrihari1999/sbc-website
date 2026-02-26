@@ -450,6 +450,59 @@
         }
       });
     });
+
+    // --- Google Analytics Event Tracking ---
+
+    // Application Form button clicks (per program)
+    document.querySelectorAll('.program-btn').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var programName = this.closest('.program-card').querySelector('.program-name').textContent;
+        gtag('event', 'application_form_click', {
+          event_category: 'engagement',
+          event_label: programName
+        });
+      });
+    });
+
+    // Hero CTA button clicks
+    document.querySelectorAll('.hero-content .btn').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var label = this.textContent.trim();
+        gtag('event', 'hero_cta_click', {
+          event_category: 'engagement',
+          event_label: label
+        });
+      });
+    });
+
+    // Contact card clicks
+    document.querySelectorAll('.contact-card').forEach(function (card) {
+      card.addEventListener('click', function () {
+        var channel = this.querySelector('h3').textContent;
+        gtag('event', 'contact_click', {
+          event_category: 'engagement',
+          event_label: channel
+        });
+      });
+    });
+
+    // Section scroll tracking
+    var trackedSections = {};
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting && !trackedSections[entry.target.id]) {
+          trackedSections[entry.target.id] = true;
+          gtag('event', 'section_view', {
+            event_category: 'scroll',
+            event_label: entry.target.id
+          });
+        }
+      });
+    }, { threshold: 0.3 });
+
+    document.querySelectorAll('section[id]').forEach(function (section) {
+      observer.observe(section);
+    });
   </script>
 </body>
 </html>
