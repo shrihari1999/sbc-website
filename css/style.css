@@ -364,17 +364,17 @@ body {
 .contact-links {
   display: flex;
   justify-content: center;
-  gap: 24px;
+  gap: 12px;
   flex-wrap: wrap;
 }
 
 .contact-card {
   background: var(--card-bg);
   border-radius: 10px;
-  padding: 28px 36px;
+  padding: 24px 10px;
   text-decoration: none;
   text-align: center;
-  min-width: 200px;
+  width: 254px;
   transition: transform 0.2s, box-shadow 0.2s;
 }
 
