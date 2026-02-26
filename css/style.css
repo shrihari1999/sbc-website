@@ -318,10 +318,16 @@ body {
   font-weight: 700;
 }
 
+.program-btn {
+  margin-top: 20px;
+  align-self: center;
+  text-align: center;
+}
+
 /* === Benefits === */
 .benefits-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 24px;
 }
 
