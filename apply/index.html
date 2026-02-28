@@ -281,8 +281,14 @@
       disableMobile: true
     });
 
-    // Pre-fill program from URL parameter
+    // Tag Clarity with referral source (on page load, so abandoned sessions are tagged too)
     var params = new URLSearchParams(window.location.search);
+    var utmSource = params.get('utm_source');
+    if (utmSource) {
+      clarity('set', 'utm_source', utmSource);
+    }
+
+    // Pre-fill program from URL parameter
     var program = params.get('program');
     if (program) {
       var radios = document.querySelectorAll('input[name="program"]');
@@ -337,6 +343,9 @@
         availableTo: dates[1] ? flatpickr.formatDate(dates[1], 'd-m-Y') : ''
       };
 
+      // Tag Clarity session for lookup
+      clarity('set', 'applicant_email', formData.email);
+
       // Submit to Google Apps Script
       fetch('https://script.google.com/macros/s/AKfycbyUKeAxHlqIdS26woX3P-SxjtLaacrOT-QyJI1x4nz278G26dTz3oMpwfdPcwVZLpuF/exec', {
         method: 'POST',
@@ -377,6 +386,28 @@
         // Re-enable submit button
         submitBtn.disabled = false;
         submitBtn.textContent = originalBtnText;
+      });
+    });
+
+    // Form funnel tracking
+    var trackedSteps = {};
+    var fieldsetSteps = {
+      'Personal Information': 1,
+      'Trading Background': 2,
+      'Program Selection': 3,
+      'Acknowledgement': 4
+    };
+
+    document.getElementById('applicationForm').addEventListener('focusin', function (e) {
+      var fieldset = e.target.closest('fieldset');
+      if (!fieldset) return;
+      var stepName = fieldset.querySelector('.form-legend').textContent;
+      if (trackedSteps[stepName]) return;
+      trackedSteps[stepName] = true;
+      gtag('event', 'form_step', {
+        event_category: 'form_funnel',
+        event_label: stepName,
+        value: fieldsetSteps[stepName]
       });
     });
   </script>
