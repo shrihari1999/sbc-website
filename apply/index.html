@@ -281,14 +281,8 @@
       disableMobile: true
     });
 
-    // Tag Clarity with referral source (on page load, so abandoned sessions are tagged too)
-    var params = new URLSearchParams(window.location.search);
-    var utmSource = params.get('utm_source');
-    if (utmSource) {
-      clarity('set', 'utm_source', utmSource);
-    }
-
     // Pre-fill program from URL parameter
+    var params = new URLSearchParams(window.location.search);
     var program = params.get('program');
     if (program) {
       var radios = document.querySelectorAll('input[name="program"]');
