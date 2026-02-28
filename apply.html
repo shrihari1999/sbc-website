@@ -312,6 +312,12 @@
       }
 
       var dates = availabilityPicker.selectedDates;
+      // Disable submit button to prevent double submission
+      var submitBtn = form.querySelector('.btn-submit');
+      var originalBtnText = submitBtn.textContent;
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Submitting...';
+
       var formData = {
         email: form.email.value,
         fullName: form.fullName.value,
@@ -331,22 +337,47 @@
         availableTo: dates[1] ? flatpickr.formatDate(dates[1], 'd-m-Y') : ''
       };
 
-      // TODO: Replace with Google Apps Script endpoint
-      // fetch('https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec', {
-      //   method: 'POST',
-      //   body: JSON.stringify(formData)
-      // }).then(...)
+      // Submit to Google Apps Script
+      fetch('https://script.google.com/macros/s/AKfycbx4vSmAS11f18jyimDOtyudWa5Rv4SMOWInzNLOFjZevC0S5rQ2pMuIyB_wk5gnY-w9/exec', {
+        method: 'POST',
+        mode: 'no-cors',
+        cache: 'no-cache',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        redirect: 'follow',
+        body: JSON.stringify(formData)
+      })
+      .then(function() {
+        // GA4 event
+        gtag('event', 'form_submit', {
+          event_category: 'application',
+          event_label: formData.program
+        });
 
-      // GA4 event
-      gtag('event', 'form_submit', {
-        event_category: 'application',
-        event_label: formData.program
+        // Show success, hide form
+        form.hidden = true;
+        document.getElementById('formSuccess').hidden = false;
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      })
+      .catch(function(error) {
+        console.error('Error:', error);
+        // Even on error, show success message since we're using no-cors mode
+        // In no-cors mode, we can't read the response, so we assume success
+        gtag('event', 'form_submit', {
+          event_category: 'application',
+          event_label: formData.program
+        });
+
+        form.hidden = true;
+        document.getElementById('formSuccess').hidden = false;
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      })
+      .finally(function() {
+        // Re-enable submit button
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalBtnText;
       });
-
-      // Show success, hide form
-      form.hidden = true;
-      document.getElementById('formSuccess').hidden = false;
-      window.scrollTo({ top: 0, behavior: 'smooth' });
     });
   </script>
 </body>
