@@ -2,3 +2,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://sharebusinessconcepts.com/sitemap.xml
+LLMs-Txt: https://sharebusinessconcepts.com/llms.txt
