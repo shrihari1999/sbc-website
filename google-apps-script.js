@@ -1,6 +1,8 @@
 // Google Apps Script for SBC Application Form
 // Deploy this as a Web App with "Anyone" access
 
+var NOTIFY_EMAIL = 'sharebusinessconcepts';
+
 function doPost(e) {
   try {
     var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
@@ -57,6 +59,9 @@ function doPost(e) {
     // Append the data
     sheet.appendRow(rowData);
 
+    // Send email notification
+    sendNotification(data, timestamp);
+
     // Return success response
     return ContentService
       .createTextOutput(JSON.stringify({ 'result': 'success' }))
@@ -70,8 +75,34 @@ function doPost(e) {
   }
 }
 
+function sendNotification(data, timestamp) {
+  var subject = 'New SBC Application: ' + data.fullName + ' — ' + data.program;
+  var body = 'New application received!\n\n'
+    + '━━━━━━━━━━━━━━━━━━━━━━━━━\n'
+    + 'Name:        ' + data.fullName + '\n'
+    + 'Email:       ' + data.email + '\n'
+    + 'WhatsApp:    ' + data.whatsapp + '\n'
+    + 'DOB:         ' + data.dob + '\n'
+    + 'Gender:      ' + data.gender + '\n'
+    + 'City:        ' + data.city + ', ' + data.country + '\n'
+    + '━━━━━━━━━━━━━━━━━━━━━━━━━\n'
+    + 'Occupation:  ' + data.occupation + '\n'
+    + 'Experience:  ' + data.experience + '\n'
+    + 'Markets:     ' + (Array.isArray(data.markets) ? data.markets.join(', ') : data.markets) + '\n'
+    + 'Challenge:   ' + data.challenge + '\n'
+    + 'Prev Course: ' + data.previousCourse + '\n'
+    + 'Goals:       ' + (Array.isArray(data.goals) ? data.goals.join(', ') : data.goals) + '\n'
+    + '━━━━━━━━━━━━━━━━━━━━━━━━━\n'
+    + 'Program:     ' + data.program + '\n'
+    + 'Available:   ' + data.availableFrom + ' to ' + data.availableTo + '\n'
+    + '━━━━━━━━━━━━━━━━━━━━━━━━━\n\n'
+    + 'Submitted: ' + timestamp.toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
+
+  MailApp.sendEmail(NOTIFY_EMAIL, subject, body);
+}
+
 // Test function (optional)
-function doGet(e) {
+function doGet() {
   return ContentService
     .createTextOutput('SBC Application Form Backend is running')
     .setMimeType(ContentService.MimeType.TEXT);
