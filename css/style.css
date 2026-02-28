@@ -543,6 +543,17 @@ body {
   color: rgba(200, 214, 229, 0.4);
 }
 
+.form-input.invalid {
+  border-color: #e74c3c;
+}
+
+.input-error {
+  color: #e74c3c;
+  font-size: 0.85rem;
+  margin-top: 6px;
+  display: block;
+}
+
 .form-select {
   appearance: none;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%233a9db5' d='M6 8L0 0h12z'/%3E%3C/svg%3E");

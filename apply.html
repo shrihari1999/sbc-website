@@ -91,6 +91,7 @@
           <div class="form-group">
             <label for="whatsapp" class="form-label">WhatsApp Number <span class="required">*</span></label>
             <input type="tel" id="whatsapp" name="whatsapp" class="form-input" required>
+            <div id="whatsapp-error" class="input-error" hidden></div>
           </div>
 
           <div class="form-group form-row">
@@ -195,7 +196,7 @@
           <div class="form-group">
             <label class="form-checkbox form-checkbox-ack">
               <input type="checkbox" name="acknowledgement" required>
-              <span>I understand that the programs offered by Share Business Concepts are purely for educational purposes. No investment advice, trading tips, or stock recommendations will be provided. I am solely responsible for my own trading and investment decisions.</span>
+              <span>I understand that the programs offered by Share Business Concepts are purely for educational purposes. No investment advice, trading tips, or stock recommendations will be provided. I am solely responsible for my own trading and investment decisions. <span class="required">*</span></span>
             </label>
           </div>
         </fieldset>
@@ -229,12 +230,40 @@
   <script>
     // WhatsApp number with country code
     const input = document.querySelector('#whatsapp')
+    const errorMsg = document.querySelector('#whatsapp-error')
+    const errorMap = ['Invalid number', 'Invalid country code', 'Too short', 'Too long', 'Invalid number']
+
     var iti = window.intlTelInput(input, {
       initialCountry: 'in',
       countryOrder: ['in', 'us', 'gb', 'ae', 'sg'],
       separateDialCode: true,
       strictMode: true,
       loadUtils: () => import("https://cdn.jsdelivr.net/npm/intl-tel-input@26.7.6/build/js/utils.js"),
+    });
+
+    // Validate phone number on blur
+    const validatePhone = function() {
+      input.classList.remove('invalid');
+      errorMsg.hidden = true;
+      errorMsg.textContent = '';
+
+      if (input.value.trim()) {
+        if (!iti.isValidNumber()) {
+          input.classList.add('invalid');
+          const errorCode = iti.getValidationError();
+          errorMsg.textContent = errorMap[errorCode] || 'Invalid number';
+          errorMsg.hidden = false;
+          return false;
+        }
+      }
+      return true;
+    };
+
+    input.addEventListener('blur', validatePhone);
+    input.addEventListener('input', function() {
+      if (input.classList.contains('invalid')) {
+        validatePhone();
+      }
     });
 
     // Date of Birth picker
@@ -269,6 +298,19 @@
       e.preventDefault();
 
       var form = e.target;
+
+      // Validate phone number
+      if (!validatePhone()) {
+        input.focus();
+        return;
+      }
+
+      // Check form validity (HTML5 validation)
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+
       var dates = availabilityPicker.selectedDates;
       var formData = {
         email: form.email.value,
