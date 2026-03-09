@@ -319,9 +319,15 @@ body {
   font-weight: 700;
 }
 
-.program-btn {
+.program-btns {
   margin-top: 20px;
-  align-self: center;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.program-btn {
   text-align: center;
 }
 
