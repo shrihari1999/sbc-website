@@ -205,6 +205,24 @@ body {
   margin-bottom: 48px;
 }
 
+/* === About === */
+.about-content {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.about-content p {
+  color: var(--text-light);
+  font-size: 1.05rem;
+  line-height: 1.8;
+  margin-bottom: 16px;
+}
+
+.about-content p:last-child {
+  margin-bottom: 0;
+}
+
 /* === Features Grid === */
 .features-grid {
   display: grid;
