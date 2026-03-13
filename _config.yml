@@ -1,0 +1,3 @@
+exclude:
+  - "apply/google-apps-script.js"
+  - "brochure/generate_brochure.py"
