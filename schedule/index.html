@@ -122,8 +122,8 @@
         });
       }
 
-      // Type 3, 4, 5 — no auto-generated batches
-      if (typeNum >= 3 || typeNum === 0) {
+      // Invalid type — show empty immediately
+      if (typeNum === 0) {
         showEmpty();
         return;
       }
@@ -187,39 +187,42 @@
           }
         });
 
-        // Auto-generate batches from consecutive unblocked, non-blacklisted days
+        // Types 1 & 2: auto-generate batches from consecutive unblocked days
+        // Types 3, 4, 5: only show batches that exist in the sheet
         var autoBatches = [];
-        var cursor = new Date(today);
-        cursor.setDate(cursor.getDate() + 1);
+        if (typeNum <= 2) {
+          var cursor = new Date(today);
+          cursor.setDate(cursor.getDate() + 1);
 
-        while (cursor < maxDate) {
-          var dateStr = formatISO(cursor);
+          while (cursor < maxDate) {
+            var dateStr = formatISO(cursor);
 
-          // Skip blocked or blacklisted days
-          if (blacklist[dateStr] || isDateBlocked(cursor)) {
-            cursor.setDate(cursor.getDate() + 1);
-            continue;
-          }
-
-          // Try to build a batch of consecutive available days
-          var batchDates = [];
-          var tempCursor = new Date(cursor);
-
-          while (batchDates.length < duration && tempCursor < maxDate) {
-            var tempStr = formatISO(tempCursor);
-            if (blacklist[tempStr] || isDateBlocked(tempCursor)) {
-              break;
+            // Skip blocked or blacklisted days
+            if (blacklist[dateStr] || isDateBlocked(cursor)) {
+              cursor.setDate(cursor.getDate() + 1);
+              continue;
             }
-            batchDates.push(new Date(tempCursor));
-            tempCursor.setDate(tempCursor.getDate() + 1);
-          }
 
-          if (batchDates.length === duration) {
-            autoBatches.push(batchDates);
-            cursor = new Date(tempCursor);
-          } else {
-            cursor = new Date(tempCursor);
-            cursor.setDate(cursor.getDate() + 1);
+            // Try to build a batch of consecutive available days
+            var batchDates = [];
+            var tempCursor = new Date(cursor);
+
+            while (batchDates.length < duration && tempCursor < maxDate) {
+              var tempStr = formatISO(tempCursor);
+              if (blacklist[tempStr] || isDateBlocked(tempCursor)) {
+                break;
+              }
+              batchDates.push(new Date(tempCursor));
+              tempCursor.setDate(tempCursor.getDate() + 1);
+            }
+
+            if (batchDates.length === duration) {
+              autoBatches.push(batchDates);
+              cursor = new Date(tempCursor);
+            } else {
+              cursor = new Date(tempCursor);
+              cursor.setDate(cursor.getDate() + 1);
+            }
           }
         }
 
