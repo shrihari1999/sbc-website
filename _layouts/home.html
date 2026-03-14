@@ -1,0 +1,366 @@
+{% assign t = site.data.i18n[page.lang] %}
+<!DOCTYPE html>
+<html lang="{{ t.meta.lang_attr }}">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LL7WHE6K10"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-LL7WHE6K10');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ t.meta.title }}</title>
+  <meta name="description" content="{{ t.meta.description }}">
+  <link rel="canonical" href="{{ t.meta.canonical }}">
+  <link rel="alternate" hreflang="en-IN" href="https://sharebusinessconcepts.com/" />
+  <link rel="alternate" hreflang="ta-IN" href="https://sharebusinessconcepts.com/ta/" />
+  <meta property="og:title" content="{{ t.meta.title }}">
+  <meta property="og:description" content="{{ t.meta.description }}">
+  <meta property="og:image" content="https://sharebusinessconcepts.com/logo-pure.png">
+  <meta property="og:url" content="{{ t.meta.og_url }}">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="{{ t.meta.og_locale }}">
+  <meta property="og:site_name" content="Share Business Concepts">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="{{ t.meta.title }}">
+  <meta name="twitter:description" content="{{ t.meta.description }}">
+  <meta name="twitter:image" content="https://sharebusinessconcepts.com/logo-pure.png">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="stylesheet" href="/css/style.css?v=6">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "EducationalOrganization",
+    "name": "Share Business Concepts",
+    "url": "https://sharebusinessconcepts.com",
+    "logo": "https://sharebusinessconcepts.com/logo-pure.png",
+    "description": "Professional financial education platform offering structured online training in stock market fundamentals, technical analysis, options trading, and NISM exam preparation.",
+    "founder": {
+      "@type": "Person",
+      "name": "Lavanya Hariharasubramanian"
+    },
+    "sameAs": [
+      "https://www.instagram.com/sharebusinessconcepts",
+      "https://www.youtube.com/@sharebusinessconcepts"
+    ],
+    "areaServed": {
+      "@type": "Country",
+      "name": "India"
+    },
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+917904472956",
+      "contactType": "customer service",
+      "availableLanguage": ["English", "Tamil"]
+    }
+  }
+  </script>
+  <script type="text/javascript">
+      (function(c,l,a,r,i,t,y){
+          c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+          t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+          y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+      })(window, document, "clarity", "script", "vo0kilx5ae");
+  </script>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="container nav-content">
+      <a href="#" class="nav-logo">
+        <img src="/logo-pure.png" alt="Share Business Concepts" class="nav-logo-img">
+      </a>
+      <button class="nav-toggle" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <ul class="nav-links">
+        <li><a href="#about">{{ t.nav.about }}</a></li>
+        <li><a href="#why-choose-us">{{ t.nav.why_choose }}</a></li>
+        <li><a href="#programs">{{ t.nav.programs }}</a></li>
+        <li><a href="#benefits">{{ t.nav.benefits }}</a></li>
+        <li><a href="#faq">{{ t.nav.faq }}</a></li>
+        <li><a href="#contact">{{ t.nav.contact }}</a></li>
+        <li><a href="#disclaimer">{{ t.nav.disclaimer }}</a></li>
+        <li><a href="{{ t.nav.lang_switch_url }}">{{ t.nav.lang_switch }}</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <video class="hero-video" autoplay muted loop playsinline>
+      <source src="/hero.mp4" type="video/mp4">
+    </video>
+    <div class="hero-overlay"></div>
+    <div class="container hero-content">
+      <img src="/logo-text.png" alt="Share Business Concepts" class="hero-logo">
+      <h1 class="hero-tagline">{{ t.hero.tagline }}</h1>
+      <p class="hero-description">{{ t.hero.description }}</p>
+      <a href="#programs" class="btn btn-primary">{{ t.hero.btn_explore }}</a>
+      <a href="https://wa.me/917904472956" class="btn btn-outline" target="_blank" rel="noopener">{{ t.hero.btn_whatsapp }}</a>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="section">
+    <div class="container">
+      <h2 class="section-title">{{ t.about.title }}</h2>
+      <div class="about-content">
+        {% for para in t.about.paragraphs %}
+          <p>{{ para }}</p>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Choose Us -->
+  <section id="why-choose-us" class="section section-alt">
+    <div class="container">
+      <h2 class="section-title">{{ t.why.title }}</h2>
+      <div class="features-grid">
+        {% for feature in t.why.features %}
+        <div class="feature-card">
+          <div class="feature-icon">{{ feature.icon }}</div>
+          <h3>{{ feature.title }}</h3>
+          <p>{{ feature.desc }}</p>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <!-- Training Programs -->
+  <section id="programs" class="section">
+    <div class="container">
+      <h2 class="section-title">{{ t.programs.title }}</h2>
+      <div class="programs-grid">
+        {% for program in t.programs.items %}
+        <div class="program-card">
+          <div class="program-header">
+            <span class="program-type">{{ program.type_label }}</span>
+            <span class="program-price">{{ program.price }}</span>
+          </div>
+          <h3 class="program-name">{{ program.name }}</h3>
+          <p class="program-audience">{{ program.audience }}</p>
+          <ul class="program-details">
+            {% for detail in program.details %}
+            <li>{{ detail }}</li>
+            {% endfor %}
+          </ul>
+          <div class="program-btns">
+            <a href="{{ t.programs.schedule_base }}?type={{ program.type_num }}" class="btn btn-primary program-btn">{{ t.programs.btn_view_batches }}</a>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <!-- Additional Benefits -->
+  <section id="benefits" class="section section-alt">
+    <div class="container">
+      <h2 class="section-title">{{ t.benefits.title }}</h2>
+      <div class="benefits-grid">
+        {% for benefit in t.benefits.items %}
+        <div class="benefit-card">
+          <h3>{{ benefit.title }}</h3>
+          <p>{{ benefit.desc }}</p>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="section">
+    <div class="container">
+      <h2 class="section-title">{{ t.faq.title }}</h2>
+      <div class="faq-list">
+        {% for item in t.faq.items %}
+        <div class="faq-item">
+          <button class="faq-question">{{ item.q }}</button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              {{ item.a }}
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact / CTA -->
+  <section id="contact" class="section section-alt">
+    <div class="container contact-section">
+      <h2 class="section-title">{{ t.contact.title }}</h2>
+      <p class="contact-tagline">{{ t.contact.tagline }}</p>
+      <div class="contact-links">
+        <a href="https://wa.me/917904472956" class="contact-card" target="_blank" rel="noopener">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          </div>
+          <h3>WhatsApp</h3>
+          <p>7904472956</p>
+        </a>
+        <a href="https://www.instagram.com/sharebusinessconcepts" class="contact-card" target="_blank" rel="noopener">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+          </div>
+          <h3>Instagram</h3>
+          <p>@sharebusinessconcepts</p>
+        </a>
+        <a href="https://www.youtube.com/@sharebusinessconcepts" class="contact-card" target="_blank" rel="noopener">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          </div>
+          <h3>YouTube</h3>
+          <p>@sharebusinessconcepts</p>
+        </a>
+        <a href="mailto:sharebusinessconcepts@gmail.com" class="contact-card">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+          </div>
+          <h3>Email</h3>
+          <p>sharebusinessconcepts@gmail.com</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Disclaimer -->
+  <section id="disclaimer" class="section">
+    <div class="container">
+      <h2 class="section-title">{{ t.disclaimer.title }}</h2>
+      <div class="disclaimer-content">
+        <ul class="disclaimer-list">
+          {% for item in t.disclaimer.items %}
+          <li>{{ item }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-content">
+      <img src="/logo-pure.png" alt="Share Business Concepts" class="footer-logo">
+      <p>Share Business Concepts &amp;</p>
+      <p>Lavanya Hariharasubramanian</p>
+      <p class="footer-sub">{{ t.footer.sub }}</p>
+      <p class="footer-disclaimer">{{ t.footer.disclaimer }}</p>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile nav toggle
+    document.querySelector('.nav-toggle').addEventListener('click', function () {
+      document.querySelector('.nav-links').classList.toggle('open');
+    });
+
+    // Close mobile nav on link click
+    document.querySelectorAll('.nav-links a').forEach(function (link) {
+      link.addEventListener('click', function () {
+        document.querySelector('.nav-links').classList.remove('open');
+      });
+    });
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
+      anchor.addEventListener('click', function (e) {
+        var target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+
+    // --- Google Analytics Event Tracking ---
+
+    // View Batches button clicks (per program)
+    document.querySelectorAll('.program-btn').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var programName = this.closest('.program-card').querySelector('.program-name').textContent;
+        gtag('event', 'view_batches_click', {
+          event_category: 'engagement',
+          event_label: programName
+        });
+      });
+    });
+
+    // Hero CTA button clicks
+    document.querySelectorAll('.hero-content .btn').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var label = this.textContent.trim();
+        gtag('event', 'hero_cta_click', {
+          event_category: 'engagement',
+          event_label: label
+        });
+      });
+    });
+
+    // Contact card clicks
+    document.querySelectorAll('.contact-card').forEach(function (card) {
+      card.addEventListener('click', function () {
+        var channel = this.querySelector('h3').textContent;
+        gtag('event', 'contact_click', {
+          event_category: 'engagement',
+          event_label: channel
+        });
+      });
+    });
+
+    // Section scroll tracking
+    var trackedSections = {};
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting && !trackedSections[entry.target.id]) {
+          trackedSections[entry.target.id] = true;
+          gtag('event', 'section_view', {
+            event_category: 'scroll',
+            event_label: entry.target.id
+          });
+        }
+      });
+    }, { threshold: 0.3 });
+
+    document.querySelectorAll('section[id]').forEach(function (section) {
+      observer.observe(section);
+    });
+
+    // FAQ accordion animation
+    document.querySelectorAll('.faq-item').forEach(function (item) {
+      var btn = item.querySelector('.faq-question');
+      var answer = item.querySelector('.faq-answer');
+
+      btn.addEventListener('click', function () {
+        if (item.classList.contains('open')) {
+          answer.style.height = answer.scrollHeight + 'px';
+          requestAnimationFrame(function () {
+            answer.style.height = '0';
+          });
+          item.classList.remove('open');
+        } else {
+          item.classList.add('open');
+          answer.style.height = answer.scrollHeight + 'px';
+          answer.addEventListener('transitionend', function handler() {
+            answer.style.height = 'auto';
+            answer.removeEventListener('transitionend', handler);
+          });
+        }
+      });
+    });
+  </script>
+</body>
+</html>

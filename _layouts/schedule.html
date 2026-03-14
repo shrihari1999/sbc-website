@@ -1,0 +1,299 @@
+{% assign t = site.data.i18n[page.lang].schedule %}
+<!DOCTYPE html>
+<html lang="{{ t.lang_attr }}">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LL7WHE6K10"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-LL7WHE6K10');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ t.meta_title }}</title>
+  <meta name="description" content="{{ t.meta_description }}">
+  <link rel="canonical" href="{{ t.canonical }}">
+  <link rel="alternate" hreflang="en-IN" href="https://sharebusinessconcepts.com/schedule/" />
+  <link rel="alternate" hreflang="ta-IN" href="https://sharebusinessconcepts.com/ta/schedule/" />
+  <meta property="og:title" content="{{ t.meta_title }}">
+  <meta property="og:description" content="{{ t.meta_description }}">
+  <meta property="og:image" content="https://sharebusinessconcepts.com/logo-pure.png">
+  <meta property="og:url" content="{{ t.og_url }}">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="{{ t.og_locale }}">
+  <meta property="og:site_name" content="Share Business Concepts">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="{{ t.meta_title }}">
+  <meta name="twitter:description" content="{{ t.meta_description }}">
+  <meta name="twitter:image" content="https://sharebusinessconcepts.com/logo-pure.png">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="stylesheet" href="/css/style.css?v=5">
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "vo0kilx5ae");
+  </script>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="container nav-content">
+      <a href="{{ t.home_url }}" class="nav-logo">
+        <img src="/logo-pure.png" alt="Share Business Concepts" class="nav-logo-img">
+      </a>
+      <a href="{{ t.home_url }}" class="btn btn-outline btn-sm">{{ t.back_home }}</a>
+    </div>
+  </nav>
+
+  <!-- Schedule Section -->
+  <section class="section form-section">
+    <div class="container">
+      <h1 class="section-title" id="schedule-title">{{ t.title }}</h1>
+      <p class="form-subtitle" id="schedule-subtitle"></p>
+
+      <div class="schedule-loader" id="schedule-loader">
+        <div class="loader-spinner"></div>
+        <p>{{ t.loading }}</p>
+      </div>
+
+      <div class="schedule-grid" id="schedule-grid">
+        <!-- Batches rendered dynamically -->
+      </div>
+
+      <div class="schedule-empty" id="schedule-empty" style="display:none;">
+        <p>{{ t.no_batches }}</p>
+        <a id="schedule-empty-wa" class="btn btn-primary schedule-btn" target="_blank" rel="noopener" style="margin-top:24px;"></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-content">
+      <img src="/logo-pure.png" alt="Share Business Concepts" class="footer-logo">
+      <p>Share Business Concepts &amp;</p>
+      <p>Lavanya Hariharasubramanian</p>
+      <p class="footer-sub">{{ site.data.i18n[page.lang].footer.sub }}</p>
+      <p class="footer-disclaimer">{{ site.data.i18n[page.lang].footer.disclaimer }}</p>
+    </div>
+  </footer>
+
+  <script>
+    (function() {
+      var T = {{ site.data.i18n[page.lang].schedule | jsonify }};
+      var WHATSAPP_NUMBER = '917904472956';
+      var WHATSAPP_SVG = '<svg class="whatsapp-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>';
+
+      var DURATIONS = { 1: 4, 2: 2, 3: 1, 4: 2, 5: 3 };
+      var PROGRAM_NAMES = T.program_names;
+      var MONTHS = T.months;
+      var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyxVuVtIBBkAZOkh7S4tXnMiZCaLC1hrBAWE8qTyU-EOnfqUdn-7xUNaELv0iXEDdo/exec';
+
+      // Parse type from URL
+      var params = new URLSearchParams(window.location.search);
+      var typeNum = parseInt(params.get('type')) || 0;
+      var program = PROGRAM_NAMES[typeNum] || PROGRAM_NAMES[String(typeNum)] || '';
+      var subtitle = document.getElementById('schedule-subtitle');
+      if (program) subtitle.textContent = program;
+
+      function showEmpty() {
+        document.getElementById('schedule-loader').style.display = 'none';
+        var emptyEl = document.getElementById('schedule-empty');
+        emptyEl.style.display = 'block';
+        var waBtn = document.getElementById('schedule-empty-wa');
+        var waMsg = T.wa_no_batches_prefix + (program || T.wa_a_program) + T.wa_no_batches_suffix;
+        waBtn.href = 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(waMsg);
+        waBtn.innerHTML = WHATSAPP_SVG + ' ' + T.contact_wa;
+        waBtn.addEventListener('click', function() {
+          gtag('event', 'check_availability_click', {
+            event_category: 'conversion',
+            event_label: (program || 'unknown') + ' | no_batches'
+          });
+        });
+      }
+
+      // Invalid type — show empty immediately
+      if (typeNum === 0) {
+        showEmpty();
+        return;
+      }
+
+      var duration = DURATIONS[typeNum];
+
+      // Fetch from Apps Script
+      fetch(APPS_SCRIPT_URL)
+        .then(function(r) { return r.json(); })
+        .then(function(data) { renderBatches(data); })
+        .catch(function() { renderBatches({ bookings: [], blacklisted_dates: [], max_spots: 7 }); });
+
+      function renderBatches(data) {
+        document.getElementById('schedule-loader').style.display = 'none';
+        var bookings = data.bookings || [];
+        var maxSpots = data.max_spots || 7;
+
+        // Build blocked date ranges from ALL active bookings
+        var blockedRanges = [];
+        bookings.forEach(function(b) {
+          blockedRanges.push({
+            start: new Date(b.booked_batch_start + 'T00:00:00'),
+            end: new Date(b.booked_batch_end + 'T00:00:00'),
+            type: b.booked_type,
+            spots_taken: b.spots_taken
+          });
+        });
+
+        // Build blacklist set
+        var blacklist = {};
+        (data.blacklisted_dates || []).forEach(function(d) { blacklist[d] = true; });
+
+        var today = new Date();
+        today.setHours(0, 0, 0, 0);
+        var maxDate = new Date(today);
+        maxDate.setMonth(maxDate.getMonth() + 1);
+
+        // Check if a date falls within ANY booked range (all types)
+        function isDateBlocked(date) {
+          var d = date.getTime();
+          for (var i = 0; i < blockedRanges.length; i++) {
+            if (d >= blockedRanges[i].start.getTime() && d <= blockedRanges[i].end.getTime()) {
+              return true;
+            }
+          }
+          return false;
+        }
+
+        // Collect same-type bookings that aren't full as explicit batches
+        var bookedBatches = [];
+        bookings.forEach(function(b) {
+          if (b.booked_type === typeNum && b.spots_taken < maxSpots) {
+            var start = new Date(b.booked_batch_start + 'T00:00:00');
+            var end = new Date(b.booked_batch_end + 'T00:00:00');
+            if (end >= today) {
+              var dates = [];
+              var d = new Date(start);
+              while (d <= end) { dates.push(new Date(d)); d.setDate(d.getDate() + 1); }
+              bookedBatches.push(dates);
+            }
+          }
+        });
+
+        // Types 1 & 2: auto-generate batches from consecutive unblocked days
+        // Types 3, 4, 5: only show batches that exist in the sheet
+        var autoBatches = [];
+        if (typeNum <= 2) {
+          var cursor = new Date(today);
+          cursor.setDate(cursor.getDate() + 1);
+
+          while (cursor < maxDate) {
+            var dateStr = formatISO(cursor);
+
+            // Skip blocked or blacklisted days
+            if (blacklist[dateStr] || isDateBlocked(cursor)) {
+              cursor.setDate(cursor.getDate() + 1);
+              continue;
+            }
+
+            // Try to build a batch of consecutive available days
+            var batchDates = [];
+            var tempCursor = new Date(cursor);
+
+            while (batchDates.length < duration && tempCursor < maxDate) {
+              var tempStr = formatISO(tempCursor);
+              if (blacklist[tempStr] || isDateBlocked(tempCursor)) {
+                break;
+              }
+              batchDates.push(new Date(tempCursor));
+              tempCursor.setDate(tempCursor.getDate() + 1);
+            }
+
+            if (batchDates.length === duration) {
+              autoBatches.push(batchDates);
+              cursor = new Date(tempCursor);
+            } else {
+              cursor = new Date(tempCursor);
+              cursor.setDate(cursor.getDate() + 1);
+            }
+          }
+        }
+
+        // Merge booked + auto-generated batches, sorted by start date
+        var batches = bookedBatches.concat(autoBatches);
+        batches.sort(function(a, b) { return a[0].getTime() - b[0].getTime(); });
+
+        var grid = document.getElementById('schedule-grid');
+
+        if (batches.length === 0) {
+          showEmpty();
+          return;
+        }
+
+        // Render batch cards
+        batches.forEach(function(batchDates) {
+          var startDate = batchDates[0];
+          var endDate = batchDates[batchDates.length - 1];
+          var dateLabel = formatDateRange(startDate, endDate);
+          var timeLabel = T.hours_per_day;
+
+          var waMsg = T.wa_check_prefix + (program ? program + ' \u2014 ' : '') + dateLabel;
+          var waLink = 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(waMsg);
+
+          var card = document.createElement('div');
+          card.className = 'schedule-card';
+          card.innerHTML =
+            '<h3 class="schedule-date">' + dateLabel + '</h3>' +
+            '<p class="schedule-time">' + timeLabel + '</p>' +
+            '<a href="' + waLink + '" class="btn btn-primary schedule-btn" target="_blank" rel="noopener">' + WHATSAPP_SVG + ' ' + T.check_availability + '</a>';
+
+          grid.appendChild(card);
+        });
+
+        // Add the "none of these dates work" card
+        var altCard = document.createElement('div');
+        altCard.className = 'schedule-card schedule-card-alt';
+        var altMsg = T.wa_no_batches_prefix + (program || T.wa_a_program) + T.wa_alt_dates_suffix;
+        var altLink = 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(altMsg);
+        altCard.innerHTML =
+          '<h3 class="schedule-alt-title">' + T.none_work_title + '</h3>' +
+          '<p class="schedule-alt-text">' + T.none_work_desc + '</p>' +
+          '<a href="' + altLink + '" class="btn btn-outline schedule-btn" target="_blank" rel="noopener">' + WHATSAPP_SVG + ' ' + T.request_dates + '</a>';
+        grid.appendChild(altCard);
+
+        // Track WhatsApp CTA clicks
+        grid.querySelectorAll('.schedule-btn').forEach(function(btn) {
+          btn.addEventListener('click', function() {
+            var isAlt = this.closest('.schedule-card-alt');
+            var dateLabel = isAlt ? 'alternative_dates' : this.closest('.schedule-card').querySelector('.schedule-date').textContent;
+            gtag('event', 'check_availability_click', {
+              event_category: 'conversion',
+              event_label: (program || 'unknown') + ' | ' + dateLabel
+            });
+          });
+        });
+      }
+
+      function formatISO(d) {
+        var y = d.getFullYear();
+        var m = String(d.getMonth() + 1).padStart(2, '0');
+        var day = String(d.getDate()).padStart(2, '0');
+        return y + '-' + m + '-' + day;
+      }
+
+      function formatDateRange(start, end) {
+        if (start.getMonth() === end.getMonth() && start.getFullYear() === end.getFullYear()) {
+          return start.getDate() + ' \u2013 ' + end.getDate() + ' ' + MONTHS[end.getMonth()] + ' ' + end.getFullYear();
+        } else {
+          return start.getDate() + ' ' + MONTHS[start.getMonth()] + ' \u2013 ' + end.getDate() + ' ' + MONTHS[end.getMonth()] + ' ' + end.getFullYear();
+        }
+      }
+    })();
+  </script>
+</body>
+</html>
