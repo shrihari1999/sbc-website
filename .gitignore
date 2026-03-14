@@ -3,3 +3,6 @@ Thumbs.db
 *.pyc
 __pycache__/
 .claude/
+_site/
+.jekyll-cache/
+Gemfile.lock
