@@ -2,3 +2,6 @@ exclude:
   - "apply/google-apps-script.js"
   - "schedule/google-apps-script.js"
   - "brochure/generate_brochure.py"
+  - "Gemfile"
+  - "Gemfile.lock"
+  - "README.md"
