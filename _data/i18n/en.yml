@@ -190,6 +190,12 @@ schedule:
   contact_wa: "Contact Us on WhatsApp"
   check_availability: "Check Availability"
   hours_per_day: "4 hours per day"
+  time_labels:
+    "1": "4 hours per day"
+    "2": "8 hours per day"
+    "3": "6 hours"
+    "4": "4 hours per day"
+    "5": "3 hours per day"
   none_work_title: "None of these dates work?"
   none_work_desc: "Let us know your preferred dates and we'll try to accommodate you."
   request_dates: "Request Different Dates"
