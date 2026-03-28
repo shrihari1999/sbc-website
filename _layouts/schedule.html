@@ -32,7 +32,7 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-  <link rel="stylesheet" href="/css/style.css?v=5">
+  <link rel="stylesheet" href="/css/style.css?v=6">
   {% if page.lang == 'ta' %}
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Tamil:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
@@ -178,16 +178,17 @@
           return false;
         }
 
-        // Collect same-type bookings that aren't full as explicit batches
+        // Collect same-type bookings as explicit batches (mark full ones)
         var bookedBatches = [];
         bookings.forEach(function(b) {
-          if (b.booked_type === typeNum && b.spots_taken < maxSpots) {
+          if (b.booked_type === typeNum) {
             var start = new Date(b.booked_batch_start + 'T00:00:00');
             var end = new Date(b.booked_batch_end + 'T00:00:00');
             if (end >= today) {
               var dates = [];
               var d = new Date(start);
               while (d <= end) { dates.push(new Date(d)); d.setDate(d.getDate() + 1); }
+              dates.full = b.spots_taken >= maxSpots;
               bookedBatches.push(dates);
             }
           }
@@ -250,15 +251,23 @@
           var dateLabel = formatDateRange(startDate, endDate);
           var timeLabel = (T.time_labels && T.time_labels[String(typeNum)]) || T.hours_per_day;
 
-          var waMsg = T.wa_check_prefix + (program ? program + ' \u2014 ' : '') + dateLabel;
-          var waLink = 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(waMsg);
-
           var card = document.createElement('div');
-          card.className = 'schedule-card';
-          card.innerHTML =
-            '<h3 class="schedule-date">' + dateLabel + '</h3>' +
-            '<p class="schedule-time">' + timeLabel + '</p>' +
-            '<a href="' + waLink + '" class="btn btn-primary schedule-btn" target="_blank" rel="noopener">' + WHATSAPP_SVG + ' ' + T.check_availability + '</a>';
+
+          if (batchDates.full) {
+            card.className = 'schedule-card schedule-card-booked';
+            card.innerHTML =
+              '<h3 class="schedule-date">' + dateLabel + '</h3>' +
+              '<p class="schedule-time">' + timeLabel + '</p>' +
+              '<span class="btn btn-disabled schedule-btn">' + T.booked + '</span>';
+          } else {
+            var waMsg = T.wa_check_prefix + (program ? program + ' \u2014 ' : '') + dateLabel;
+            var waLink = 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(waMsg);
+            card.className = 'schedule-card';
+            card.innerHTML =
+              '<h3 class="schedule-date">' + dateLabel + '</h3>' +
+              '<p class="schedule-time">' + timeLabel + '</p>' +
+              '<a href="' + waLink + '" class="btn btn-primary schedule-btn" target="_blank" rel="noopener">' + WHATSAPP_SVG + ' ' + T.check_availability + '</a>';
+          }
 
           grid.appendChild(card);
         });
