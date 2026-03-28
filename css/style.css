@@ -489,6 +489,7 @@ body {
   flex-direction: column;
   align-items: center;
   min-width: 295px;
+  position: relative;
 }
 
 .schedule-label {
@@ -571,6 +572,22 @@ body {
   font-size: 1.05rem;
   padding: 48px 0;
   line-height: 1.6;
+}
+
+.schedule-badge-filling {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #e74c3c;
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 4px 14px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
 }
 
 .schedule-card-booked {

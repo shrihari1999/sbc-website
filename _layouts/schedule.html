@@ -189,6 +189,7 @@
               var d = new Date(start);
               while (d <= end) { dates.push(new Date(d)); d.setDate(d.getDate() + 1); }
               dates.full = b.spots_taken >= maxSpots;
+              dates.filling = b.spots_taken > 0 && b.spots_taken < maxSpots;
               bookedBatches.push(dates);
             }
           }
@@ -262,8 +263,10 @@
           } else {
             var waMsg = T.wa_check_prefix + (program ? program + ' \u2014 ' : '') + dateLabel;
             var waLink = 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(waMsg);
+            var badge = batchDates.filling ? '<span class="schedule-badge-filling">' + T.fast_filling + '</span>' : '';
             card.className = 'schedule-card';
             card.innerHTML =
+              badge +
               '<h3 class="schedule-date">' + dateLabel + '</h3>' +
               '<p class="schedule-time">' + timeLabel + '</p>' +
               '<a href="' + waLink + '" class="btn btn-primary schedule-btn" target="_blank" rel="noopener">' + WHATSAPP_SVG + ' ' + T.check_availability + '</a>';

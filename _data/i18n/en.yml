@@ -190,6 +190,7 @@ schedule:
   contact_wa: "Contact Us on WhatsApp"
   check_availability: "Check Availability"
   booked: "Batch Full"
+  fast_filling: "Filling Fast"
   hours_per_day: "4 hours per day"
   time_labels:
     "1": "4 hours per day"
