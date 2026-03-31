@@ -162,8 +162,11 @@
         var blacklist = {};
         (data.blacklisted_dates || []).forEach(function(d) { blacklist[d] = true; });
 
-        var today = new Date();
-        today.setHours(0, 0, 0, 0);
+        // Use IST (UTC+5:30) to determine "today"
+        var nowUTC = new Date();
+        var istOffset = 5.5 * 60 * 60 * 1000;
+        var nowIST = new Date(nowUTC.getTime() + nowUTC.getTimezoneOffset() * 60 * 1000 + istOffset);
+        var today = new Date(nowIST.getFullYear(), nowIST.getMonth(), nowIST.getDate());
         var maxDate = new Date(today);
         maxDate.setMonth(maxDate.getMonth() + 1);
 
@@ -184,7 +187,7 @@
           if (b.booked_type === typeNum) {
             var start = new Date(b.booked_batch_start + 'T00:00:00');
             var end = new Date(b.booked_batch_end + 'T00:00:00');
-            if (end >= today) {
+            if (start > today) {
               var dates = [];
               var d = new Date(start);
               while (d <= end) { dates.push(new Date(d)); d.setDate(d.getDate() + 1); }
