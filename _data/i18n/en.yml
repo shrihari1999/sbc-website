@@ -225,3 +225,11 @@ schedule:
     - "October"
     - "November"
     - "December"
+  days_short:
+    - "Sun"
+    - "Mon"
+    - "Tue"
+    - "Wed"
+    - "Thu"
+    - "Fri"
+    - "Sat"
