@@ -254,6 +254,8 @@
           var startDate = batchDates[0];
           var endDate = batchDates[batchDates.length - 1];
           var dateLabel = formatDateRange(startDate, endDate);
+          var dayLabel = formatDayRange(startDate, endDate);
+          var dateHTML = dateLabel + '<br><span class="schedule-days">' + dayLabel + '</span>';
           var timeLabel = (T.time_labels && T.time_labels[String(typeNum)]) || T.hours_per_day;
 
           var card = document.createElement('div');
@@ -261,7 +263,7 @@
           if (batchDates.full) {
             card.className = 'schedule-card schedule-card-booked';
             card.innerHTML =
-              '<h3 class="schedule-date">' + dateLabel + '</h3>' +
+              '<h3 class="schedule-date">' + dateHTML + '</h3>' +
               '<p class="schedule-time">' + timeLabel + '</p>' +
               '<span class="btn btn-disabled schedule-btn">' + T.booked + '</span>';
           } else {
@@ -271,7 +273,7 @@
             card.className = 'schedule-card';
             card.innerHTML =
               badge +
-              '<h3 class="schedule-date">' + dateLabel + '</h3>' +
+              '<h3 class="schedule-date">' + dateHTML + '</h3>' +
               '<p class="schedule-time">' + timeLabel + '</p>' +
               '<a href="' + waLink + '" class="btn btn-primary schedule-btn" target="_blank" rel="noopener">' + WHATSAPP_SVG + ' ' + T.check_availability + '</a>';
           }
@@ -311,17 +313,20 @@
       }
 
       function formatDateRange(start, end) {
-        var dayRange = DAYS[start.getDay()] + ' \u2013 ' + DAYS[end.getDay()];
-        var dateStr;
         if (start.getTime() === end.getTime()) {
-          dateStr = start.getDate() + ' ' + MONTHS[start.getMonth()] + ' ' + start.getFullYear();
-          dayRange = DAYS[start.getDay()];
+          return start.getDate() + ' ' + MONTHS[start.getMonth()] + ' ' + start.getFullYear();
         } else if (start.getMonth() === end.getMonth() && start.getFullYear() === end.getFullYear()) {
-          dateStr = start.getDate() + ' \u2013 ' + end.getDate() + ' ' + MONTHS[end.getMonth()] + ' ' + end.getFullYear();
+          return start.getDate() + ' \u2013 ' + end.getDate() + ' ' + MONTHS[end.getMonth()] + ' ' + end.getFullYear();
         } else {
-          dateStr = start.getDate() + ' ' + MONTHS[start.getMonth()] + ' \u2013 ' + end.getDate() + ' ' + MONTHS[end.getMonth()] + ' ' + end.getFullYear();
+          return start.getDate() + ' ' + MONTHS[start.getMonth()] + ' \u2013 ' + end.getDate() + ' ' + MONTHS[end.getMonth()] + ' ' + end.getFullYear();
         }
-        return dateStr + '<br><span class="schedule-days">' + dayRange + '</span>';
+      }
+
+      function formatDayRange(start, end) {
+        if (start.getTime() === end.getTime()) {
+          return DAYS[start.getDay()];
+        }
+        return DAYS[start.getDay()] + ' \u2013 ' + DAYS[end.getDay()];
       }
     })();
   </script>
