@@ -296,10 +296,9 @@
         grid.querySelectorAll('.schedule-btn').forEach(function(btn) {
           btn.addEventListener('click', function() {
             var isAlt = this.closest('.schedule-card-alt');
-            var dateLabel = isAlt ? 'alternative_dates' : this.closest('.schedule-card').querySelector('.schedule-date').textContent;
             gtag('event', 'check_availability_click', {
               event_category: 'conversion',
-              event_label: (program || 'unknown') + ' | ' + dateLabel
+              event_label: program || 'unknown'
             });
           });
         });
