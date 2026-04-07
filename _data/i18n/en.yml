@@ -68,6 +68,17 @@ programs:
   items:
     - type_num: 1
       type_label: "Type 1"
+      price: "Rs. 10,000"
+      name: "Pure Fundamentals"
+      audience: "Ideal for FinCo employees"
+      details:
+        - "Duration: 1 day (6 hrs)"
+        - "Analysing financial statements &amp; Balance Sheets"
+        - "Understanding key metrics"
+        - "Elaborated learning of qualitative &amp; quantitative factors"
+        - "Structured decision making"
+    - type_num: 2
+      type_label: "Type 2"
       price: "Rs. 20,000"
       name: "4-Day Program"
       audience: "Ideal for traders/investors"
@@ -80,30 +91,19 @@ programs:
         - "Derivative concepts"
         - "Risk management"
         - "Mind management"
-    - type_num: 2
-      type_label: "Type 2"
+    - type_num: 3
+      type_label: "Type 3"
       price: "Rs. 25,000"
       name: "2-Day Program"
-      audience: "Fast track version of Type 1"
+      audience: "Fast track version of Type 2"
       details:
         - "Duration: 2 days (8 hrs/day)"
         - "Theory &amp; Practicals combined"
-    - type_num: 3
-      type_label: "Type 3"
-      price: "Rs. 10,000"
-      name: "Pure Fundamentals"
-      audience: "Ideal for FinCo employees"
-      details:
-        - "Duration: 1 day (6 hrs)"
-        - "Analysing financial statements &amp; Balance Sheets"
-        - "Understanding key metrics"
-        - "Elaborated learning of qualitative &amp; quantitative factors"
-        - "Structured decision making"
     - type_num: 4
       type_label: "Type 4"
       price: "Rs. 15,000"
       name: "Options Strategies"
-      audience: "Only after completing Type 1 or Type 2"
+      audience: "Only after completing Type 2 or Type 3"
       details:
         - "Duration: 2 days (Theory + Practical)"
         - "Options strategies"
@@ -193,9 +193,9 @@ schedule:
   fast_filling: "Filling Fast"
   hours_per_day: "4 hours per day"
   time_labels:
-    "1": "4 hours per day"
-    "2": "8 hours per day"
-    "3": "6 hours"
+    "1": "6 hours"
+    "2": "4 hours per day"
+    "3": "8 hours per day"
     "4": "4 hours per day"
     "5": "3 hours per day"
   none_work_title: "None of these dates work?"
@@ -207,9 +207,9 @@ schedule:
   wa_alt_dates_suffix: " but the listed dates do not work for me. Could you let me know about alternative dates?"
   wa_a_program: "a program"
   program_names:
-    "1": "Type 1: 4-Day Program"
-    "2": "Type 2: 2-Day Program"
-    "3": "Type 3: Pure Fundamentals"
+    "1": "Type 1: Pure Fundamentals"
+    "2": "Type 2: 4-Day Program"
+    "3": "Type 3: 2-Day Program"
     "4": "Type 4: Options Strategies"
     "5": "Type 5: NISM Exam Training"
   months:

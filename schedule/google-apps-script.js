@@ -6,7 +6,7 @@
 // DEPLOY: Deploy > New deployment > Web app > Anyone > Deploy
 // ============================================================
 
-var DURATIONS = { 1: 4, 2: 2, 3: 1, 4: 2, 5: 3 };
+var DURATIONS = { 1: 1, 2: 4, 3: 2, 4: 2, 5: 3 };
 var MAX_SPOTS = 7;
 var TIMEZONE = 'Asia/Kolkata';
 
