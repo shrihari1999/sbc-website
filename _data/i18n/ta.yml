@@ -80,7 +80,7 @@ programs:
     - type_num: 2
       type_label: "வகை 2"
       price: "ரூ. 20,000"
-      name: "4-நாள் திட்டம்"
+      name: "Structured Trading"
       audience: "வர்த்தகர்கள்/முதலீட்டாளர்களுக்கு ஏற்றது"
       details:
         - "கால அளவு: 4 நாட்கள் (4 மணி நேரம்/நாள்)"
@@ -94,7 +94,7 @@ programs:
     - type_num: 3
       type_label: "வகை 3"
       price: "ரூ. 25,000"
-      name: "2-நாள் திட்டம்"
+      name: "Structured Trading - Fast Track"
       audience: "வகை 2 இன் விரைவுப் பாதை"
       details:
         - "கால அளவு: 2 நாட்கள் (8 மணி நேரம்/நாள்)"
@@ -208,8 +208,8 @@ schedule:
   wa_a_program: "ஒரு திட்டம்"
   program_names:
     "1": "வகை 1: அடிப்படைப் பகுப்பாய்வு"
-    "2": "வகை 2: 4-நாள் திட்டம்"
-    "3": "வகை 3: 2-நாள் திட்டம்"
+    "2": "வகை 2: Structured Trading"
+    "3": "வகை 3: Structured Trading - Fast Track"
     "4": "வகை 4: ஆப்ஷன்ஸ் உத்திகள்"
     "5": "வகை 5: NISM தேர்வு பயிற்சி"
   months:

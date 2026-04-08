@@ -80,7 +80,7 @@ programs:
     - type_num: 2
       type_label: "Type 2"
       price: "Rs. 20,000"
-      name: "4-Day Program"
+      name: "Structured Trading"
       audience: "Ideal for traders/investors"
       details:
         - "Duration: 4 days (4 hrs/day)"
@@ -94,11 +94,17 @@ programs:
     - type_num: 3
       type_label: "Type 3"
       price: "Rs. 25,000"
-      name: "2-Day Program"
+      name: "Structured Trading - Fast Track"
       audience: "Fast track version of Type 2"
       details:
         - "Duration: 2 days (8 hrs/day)"
-        - "Theory &amp; Practicals combined"
+        - "Structure: Theory &amp; Practicals combined"
+        - "Stock market basics"
+        - "Fundamental analysis"
+        - "Technical analysis"
+        - "Derivative concepts"
+        - "Risk management"
+        - "Mind management"
     - type_num: 4
       type_label: "Type 4"
       price: "Rs. 15,000"
@@ -208,8 +214,8 @@ schedule:
   wa_a_program: "a program"
   program_names:
     "1": "Type 1: Pure Fundamentals"
-    "2": "Type 2: 4-Day Program"
-    "3": "Type 3: 2-Day Program"
+    "2": "Type 2: Structured Trading"
+    "3": "Type 3: Structured Trading - Fast Track"
     "4": "Type 4: Options Strategies"
     "5": "Type 5: NISM Exam Training"
   months:
