@@ -80,7 +80,7 @@ programs:
     - type_num: 2
       type_label: "வகை 2"
       price: "ரூ. 20,000"
-      name: "Structured Trading"
+      name: "கட்டமைந்த ட்ரேடிங்"
       audience: "வர்த்தகர்கள்/முதலீட்டாளர்களுக்கு ஏற்றது"
       details:
         - "கால அளவு: 4 நாட்கள் (4 மணி நேரம்/நாள்)"
@@ -94,7 +94,7 @@ programs:
     - type_num: 3
       type_label: "வகை 3"
       price: "ரூ. 25,000"
-      name: "Structured Trading - Fast Track"
+      name: "கட்டமைந்த ட்ரேடிங் - விரைவு பயிற்சி"
       audience: "வகை 2 இன் விரைவுப் பாதை"
       details:
         - "கால அளவு: 2 நாட்கள் (8 மணி நேரம்/நாள்)"
