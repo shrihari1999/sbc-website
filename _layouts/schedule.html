@@ -137,12 +137,63 @@
 
       var duration = DURATIONS[typeNum];
 
-      // Fetch from Apps Script
+      // ============================================================
+      // TEMPORARY: Hardcoded batches.
+      // To restore dynamic loading, comment out renderHardcoded()
+      // and uncomment the fetch block below.
+      // ============================================================
+      var HARDCODED_BATCHES = [
+        { type: 1, start: '2026-04-14', end: '2026-04-14', time: '9:00am – 1:00pm IST<br>2:00pm – 6:00pm IST' },
+        { type: 1, start: '2026-04-25', end: '2026-04-25', time: '9:00am – 1:00pm IST<br>2:00pm – 6:00pm IST' },
+        { type: 4, start: '2026-04-16', end: '2026-04-17', time: '1:00pm – 5:00pm IST' },
+        { type: 3, start: '2026-04-18', end: '2026-04-19', time: '9:30am – 1:30pm IST<br>2:30pm – 6:30pm IST' },
+        { type: 2, start: '2026-04-20', end: '2026-04-23', time: '10:00am – 2:00pm IST' },
+        { type: 2, start: '2026-04-20', end: '2026-04-23', time: '6:30pm – 10:30pm IST' },
+        { type: 2, start: '2026-05-01', end: '2026-05-04', time: '10:00am – 2:00pm IST' },
+        { type: 2, start: '2026-05-01', end: '2026-05-04', time: '6:30pm – 10:30pm IST' },
+        { type: 3, start: '2026-05-09', end: '2026-05-10', time: '9:30am – 1:30pm IST<br>2:30pm – 6:30pm IST' }
+      ];
+      renderHardcoded();
+
+      /* DYNAMIC LOADING — temporarily disabled
       fetch(APPS_SCRIPT_URL)
         .then(function(r) { return r.json(); })
         .then(function(data) { renderBatches(data); })
         .catch(function() { renderBatches({ bookings: [], blacklisted_dates: [], max_spots: 7 }); });
+      */
 
+      function renderHardcoded() {
+        document.getElementById('schedule-loader').style.display = 'none';
+        var nowUTC = new Date();
+        var istOffset = 5.5 * 60 * 60 * 1000;
+        var nowIST = new Date(nowUTC.getTime() + nowUTC.getTimezoneOffset() * 60 * 1000 + istOffset);
+        var today = new Date(nowIST.getFullYear(), nowIST.getMonth(), nowIST.getDate());
+
+        var batches = [];
+        HARDCODED_BATCHES.forEach(function(b) {
+          if (b.type !== typeNum) return;
+          var start = new Date(b.start + 'T00:00:00');
+          var end = new Date(b.end + 'T00:00:00');
+          if (start <= today) return;
+          var dates = [];
+          var d = new Date(start);
+          while (d <= end) { dates.push(new Date(d)); d.setDate(d.getDate() + 1); }
+          dates.time = b.time;
+          batches.push(dates);
+        });
+        batches.sort(function(a, b) { return a[0].getTime() - b[0].getTime(); });
+
+        var grid = document.getElementById('schedule-grid');
+        if (batches.length === 0) {
+          showEmpty();
+          return;
+        }
+        renderBatchCards(grid, batches);
+        appendAltCard(grid);
+        attachClickTracking(grid);
+      }
+
+      /* DYNAMIC RENDERING — temporarily disabled
       function renderBatches(data) {
         document.getElementById('schedule-loader').style.display = 'none';
         var bookings = data.bookings || [];
@@ -296,6 +347,63 @@
         grid.querySelectorAll('.schedule-btn').forEach(function(btn) {
           btn.addEventListener('click', function() {
             var isAlt = this.closest('.schedule-card-alt');
+            gtag('event', 'check_availability_click', {
+              event_category: 'conversion',
+              event_label: program || 'unknown'
+            });
+          });
+        });
+      }
+      */
+
+      function renderBatchCards(grid, batches) {
+        batches.forEach(function(batchDates) {
+          var startDate = batchDates[0];
+          var endDate = batchDates[batchDates.length - 1];
+          var dateLabel = formatDateRange(startDate, endDate);
+          var dayLabel = formatDayRange(startDate, endDate);
+          var dateHTML = dateLabel + '<br><span class="schedule-days">' + dayLabel + '</span>';
+          var timeLabel = batchDates.time || (T.time_labels && T.time_labels[String(typeNum)]) || T.hours_per_day;
+
+          var card = document.createElement('div');
+
+          if (batchDates.full) {
+            card.className = 'schedule-card schedule-card-booked';
+            card.innerHTML =
+              '<h3 class="schedule-date">' + dateHTML + '</h3>' +
+              '<p class="schedule-time">' + timeLabel + '</p>' +
+              '<span class="btn btn-disabled schedule-btn">' + T.booked + '</span>';
+          } else {
+            var waMsg = T.wa_check_prefix + (program ? program + ' \u2014 ' : '') + dateLabel;
+            var waLink = 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(waMsg);
+            var badge = batchDates.filling ? '<span class="schedule-badge-filling">' + T.fast_filling + '</span>' : '';
+            card.className = 'schedule-card';
+            card.innerHTML =
+              badge +
+              '<h3 class="schedule-date">' + dateHTML + '</h3>' +
+              '<p class="schedule-time">' + timeLabel + '</p>' +
+              '<a href="' + waLink + '" class="btn btn-primary schedule-btn" target="_blank" rel="noopener">' + WHATSAPP_SVG + ' ' + T.check_availability + '</a>';
+          }
+
+          grid.appendChild(card);
+        });
+      }
+
+      function appendAltCard(grid) {
+        var altCard = document.createElement('div');
+        altCard.className = 'schedule-card schedule-card-alt';
+        var altMsg = T.wa_no_batches_prefix + (program || T.wa_a_program) + T.wa_alt_dates_suffix;
+        var altLink = 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(altMsg);
+        altCard.innerHTML =
+          '<h3 class="schedule-alt-title">' + T.none_work_title + '</h3>' +
+          '<p class="schedule-alt-text">' + T.none_work_desc + '</p>' +
+          '<a href="' + altLink + '" class="btn btn-outline schedule-btn" target="_blank" rel="noopener">' + WHATSAPP_SVG + ' ' + T.request_dates + '</a>';
+        grid.appendChild(altCard);
+      }
+
+      function attachClickTracking(grid) {
+        grid.querySelectorAll('.schedule-btn').forEach(function(btn) {
+          btn.addEventListener('click', function() {
             gtag('event', 'check_availability_click', {
               event_category: 'conversion',
               event_label: program || 'unknown'
