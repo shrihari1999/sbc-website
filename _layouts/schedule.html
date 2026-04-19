@@ -505,7 +505,7 @@
               '<p class="schedule-time">' + timeLabel + '</p>' +
               '<span class="btn btn-disabled schedule-btn">' + T.booked + '</span>';
           } else {
-            var waMsg = T.wa_check_prefix + (program ? program + ' \u2014 ' : '') + dateLabel;
+            var waMsg = T.wa_check_prefix + (program ? program + ' \u2014 ' : '') + dateLabel + ' (' + timeLabel + ')';
             var waLink = 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(waMsg);
             var badge = batchDates.filling ? '<span class="schedule-badge-filling">' + T.fast_filling + '</span>' : '';
             card.className = 'schedule-card';
