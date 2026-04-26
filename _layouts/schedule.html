@@ -13,6 +13,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{ t.meta_title }}</title>
+  <script>
+    (function() {
+      var PROGRAM_NAMES = {{ t.program_names | jsonify }};
+      var typeNum = new URLSearchParams(window.location.search).get('type');
+      var program = PROGRAM_NAMES[typeNum];
+      if (program) {
+        document.title = program + ' — {{ t.title }} | Share Business Concepts';
+      }
+    })();
+  </script>
   <meta name="description" content="{{ t.meta_description }}">
   <link rel="canonical" href="{{ t.canonical }}">
   <link rel="alternate" hreflang="en-IN" href="https://sharebusinessconcepts.com/schedule/" />
