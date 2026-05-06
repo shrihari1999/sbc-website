@@ -194,6 +194,15 @@
       var RULES_START_MONTH = 5; // June (0-indexed)
       var GENERATE_MONTHS_AHEAD = 3;
 
+      // Per-month overrides for exceptions to the master rules.
+      // Keys: 'YYYY-M' (1-indexed month). Values override the default rule output.
+      var DATE_OVERRIDES = {
+        '2026-6': {
+          type1_third_wed: new Date(2026, 5, 15),       // default: June 17 → use June 15
+          type2_fri_before_2nd_sat: new Date(2026, 5, 16) // default: June 12 → use June 16 (range becomes 16-19)
+        }
+      };
+
       function generateBatchesFromRules(year, month) {
         function nthWeekday(wd, n) {
           var first = new Date(year, month, 1);
@@ -211,6 +220,8 @@
           return r;
         }
 
+        var ov = DATE_OVERRIDES[year + '-' + (month + 1)] || {};
+
         var out = [];
 
         // Type 1 — 1st Sunday & 3rd Wednesday
@@ -218,7 +229,8 @@
           '10:00am – 4:30pm IST<br>(30 min break)',
           '6:00pm – 12:30am IST<br>(30 min break)'
         ];
-        [nthWeekday(0, 1), nthWeekday(3, 3)].forEach(function(d) {
+        var t1Days = [nthWeekday(0, 1), ov.type1_third_wed || nthWeekday(3, 3)];
+        t1Days.forEach(function(d) {
           t1Times.forEach(function(t) {
             out.push({ type: 1, start: d, end: d, time: t });
           });
@@ -227,9 +239,11 @@
         // Type 2 — Fri before 2nd Sat → Mon, Tue before last Wed → Fri
         var sat2 = nthWeekday(6, 2);
         var lastWed = lastWeekday(3);
+        var t2Start1 = ov.type2_fri_before_2nd_sat || addDays(sat2, -1);
+        var t2Start2 = ov.type2_tue_before_last_wed || addDays(lastWed, -1);
         var t2Ranges = [
-          [addDays(sat2, -1), addDays(sat2, 2)],
-          [addDays(lastWed, -1), addDays(lastWed, 2)]
+          [t2Start1, addDays(t2Start1, 3)],
+          [t2Start2, addDays(t2Start2, 3)]
         ];
         var t2Times = [
           '7:00am – 11:15am IST<br>(15 min break)',
