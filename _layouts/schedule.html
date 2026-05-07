@@ -208,8 +208,11 @@
       // Keys: 'YYYY-M' (1-indexed month). Values override the default rule output.
       var DATE_OVERRIDES = {
         '2026-6': {
-          type1_third_wed: new Date(2026, 5, 15),       // default: June 17 → use June 15
-          type2_fri_before_2nd_sat: new Date(2026, 5, 16) // default: June 12 → use June 16 (range becomes 16-19)
+          type1_third_wed: new Date(2026, 5, 15),         // default: June 17 → use June 15
+          type2_fri_before_2nd_sat: new Date(2026, 5, 16), // default: June 12 → use June 16 (range becomes 16-19)
+          type2_tue_before_last_wed: new Date(2026, 5, 26), // default: June 23 → use June 26 (range becomes 26-29)
+          type3_4th_sat: new Date(2026, 5, 20),           // default: June 27-28 → use June 20-21
+          type4_3rd_sat: new Date(2026, 5, 24)            // default: June 20-21 → use June 24-25
         }
       };
 
@@ -268,7 +271,7 @@
 
         // Type 3 — 2nd Wed-Thu, 4th Sat-Sun
         var wed2 = nthWeekday(3, 2);
-        var sat4 = nthWeekday(6, 4);
+        var sat4 = ov.type3_4th_sat || nthWeekday(6, 4);
         var t3Time = '10:00am – 7:00pm IST<br>(2 breaks)';
         [[wed2, addDays(wed2, 1)], [sat4, addDays(sat4, 1)]].forEach(function(r) {
           out.push({ type: 3, start: r[0], end: r[1], time: t3Time });
@@ -276,7 +279,7 @@
 
         // Type 4 — 1st Wed-Thu, 3rd Sat-Sun
         var wed1 = nthWeekday(3, 1);
-        var sat3 = nthWeekday(6, 3);
+        var sat3 = ov.type4_3rd_sat || nthWeekday(6, 3);
         var t4Times = [
           '8:00am – 12:15pm IST<br>(15 min break)',
           '2:00pm – 6:15pm IST<br>(15 min break)',
