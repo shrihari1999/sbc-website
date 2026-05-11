@@ -249,6 +249,22 @@
     </div>
   </section>
 
+  <!-- Policy -->
+  <section id="policy" class="section">
+    <div class="container">
+      <h2 class="section-title">{{ t.policy.title }}</h2>
+      <div class="disclaimer-content">
+        <p class="policy-intro">{{ t.policy.intro }}</p>
+        <ul class="disclaimer-list">
+          {% for item in t.policy.items %}
+          <li>{{ item }}</li>
+          {% endfor %}
+        </ul>
+        <p class="policy-outro">{{ t.policy.outro }}</p>
+      </div>
+    </div>
+  </section>
+
   <!-- Disclaimer -->
   <section id="disclaimer" class="section">
     <div class="container">

@@ -719,6 +719,21 @@ body {
   font-weight: 700;
 }
 
+.policy-intro,
+.policy-outro {
+  color: var(--text-light);
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+.policy-intro {
+  margin-bottom: 12px;
+}
+
+.policy-outro {
+  margin-top: 16px;
+}
+
 /* === Footer === */
 .footer {
   border-top: 1px solid rgba(58, 157, 181, 0.15);

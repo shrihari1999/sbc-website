@@ -164,6 +164,25 @@ contact:
   title: "Find Us Everywhere"
   tagline: "Learn. Analyze. Trade with Confidence."
 
+policy:
+  title: "Class Scheduling, Attendance, Rescheduling, Punctuality &amp; Certification Policy"
+  intro: "To ensure proper scheduling and smooth conduct of sessions for all participants, kindly note the following guidelines:"
+  items:
+    - "Enrollment will be confirmed only upon successful fee payment."
+    - "Your slot/batch seat is reserved exclusively based on your registration."
+    - "Participants are requested to join the session on time to avoid disruption to the class flow."
+    - "Sessions will begin as per the scheduled timing, irrespective of delayed joining by participants."
+    - "Excessive late joining may result in missing portions of the session, and separate repeat coverage may not always be possible."
+    - "In case you are unable to attend a scheduled session, prior intimation is mandatory."
+    - "Rescheduling requests should preferably be informed at least 24 hours before the scheduled session timing."
+    - "Rescheduling can be accommodated only up to the immediate next batch of the same course, subject to slot availability."
+    - "Absence without prior communication may be treated as a completed session, since the slot has already been reserved exclusively for you."
+    - "Fees once paid are non-refundable."
+    - "For multi-session programs, participants are requested to complete all sessions within the communicated batch/schedule timeline."
+    - "Repeated postponements or prolonged inactivity without communication may lead to closure of the enrollment."
+    - "Certificates (where applicable) will be issued only upon successful completion/attendance of the respective course or program."
+  outro: "We appreciate your understanding and cooperation in helping us maintain a structured and effective learning environment for everyone."
+
 disclaimer:
   title: "Disclaimer"
   items:
