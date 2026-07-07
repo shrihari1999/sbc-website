@@ -204,6 +204,15 @@
       var RULES_START_MONTH = 5; // June (0-indexed)
       var GENERATE_MONTHS_AHEAD = 3;
 
+      // Blacklisted dates ('YYYY-MM-DD'). Any batch overlapping one of these
+      // dates is hidden. (Local stand-in for the disabled Sheets "Blacklist".)
+      var BLACKLISTED_DATES = {
+        '2026-07-18': true,
+        '2026-07-19': true,
+        '2026-08-15': true,
+        '2026-08-16': true
+      };
+
       // Per-month overrides for exceptions to the master rules.
       // Keys: 'YYYY-M' (1-indexed month). Values override the default rule output.
       var DATE_OVERRIDES = {
@@ -329,13 +338,25 @@
           }
         }
 
+        function pad(n) { return (n < 10 ? '0' : '') + n; }
+        function isBlacklisted(d) {
+          var key = d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate());
+          return !!BLACKLISTED_DATES[key];
+        }
+
         var batches = [];
         allBatches.forEach(function(b) {
           if (b.type !== typeNum) return;
           if (b.start <= today) return;
           var dates = [];
+          var blocked = false;
           var dt = new Date(b.start);
-          while (dt <= b.end) { dates.push(new Date(dt)); dt.setDate(dt.getDate() + 1); }
+          while (dt <= b.end) {
+            if (isBlacklisted(dt)) blocked = true;
+            dates.push(new Date(dt));
+            dt.setDate(dt.getDate() + 1);
+          }
+          if (blocked) return;
           dates.time = b.time;
           batches.push(dates);
         });
